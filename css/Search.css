@@ -236,6 +236,10 @@ body{
     border: none;
     position: relative;
 }
+
+.inst {
+    padding: 3em 20em;
+}
 .input{
     position: absolute;
     left: 50%;
@@ -275,7 +279,7 @@ body{
 }
 
 main  {
-    margin-top: 10em;
+    margin-top: 3em;
     margin-inline: 3em;
 }
 

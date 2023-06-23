@@ -1,97 +1,200 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookmarks</title>
-    <style>
-      *{
-        margin: 0;
-        padding: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        box-sizing: border-box;
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js">
+    </script>
+    <script src="../js/config.js">
+    </script>
+    <script>
+      const uid = sessionStorage.getItem('uid')
+
+      if (uid == null) {
+        window.location.href = './LogInPage.html'
       }
-.card {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  .card-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-  }
-  
-  .card-content {
-    padding: 1.9em 1.3em;
-  }
-  
-  .card-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .card-description {
-    margin-bottom: 2em;
-  }
-  
-  .card-link {
-    background-color: #054300;
-    color: white;
-    padding: .5em 1em;
-    border-radius: 5px;
-    font-weight: 600;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  #bookmarkContainer {
-    display: flex;
-    flex-flow: row wrap;
-    padding: 3em;
-    gap: 2em;
-  }
-  .heading {
-    margin-bottom: 1em;
-    padding: 3em;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .heading h1 {
-    font-size: 50px;
-  }
+    </script>
+    <title>
+      ReciFilo
+    </title>
+    <style>
+      *{ margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; box-sizing:
+      border-box; } .back { display: flex; gap: 2em; color: rgb(0, 0, 0); padding-bottom:
+      3em; align-items: center; } .back i{ color: rgb(0, 0, 0) ; padding: .6em;
+      border-radius: 50%; -webkit-border-radius: 50%; -moz-border-radius: 50%;
+      -ms-border-radius: 50%; -o-border-radius: 50%; cursor: pointer; } .back
+      i:hover { background-color: rgba(103, 103, 103, 0.5); transition: background-color
+      .3s ease; -webkit-transition: background-color .3s ease; -moz-transition:
+      background-color .3s ease; -ms-transition: background-color .3s ease; -o-transition:
+      background-color .3s ease; } .card { width: 300px; border: 1px solid #ccc;
+      border-radius: 4px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); background-color:
+      #fff; } .card-image { width: 100%; height: 200px; object-fit: cover; border-top-left-radius:
+      4px; border-top-right-radius: 4px; } .card-content { padding: 1.9em 1.3em;
+      } .card-title { font-size: 18px; font-weight: bold; margin: 0; } .card-description
+      { margin-bottom: 2em; } .card-link { background-color: #054300; color:
+      white; padding: .5em 1em; border-radius: 5px; font-weight: 600; text-decoration:
+      none; display: flex; justify-content: center; align-items: center; } #bookmarkContainer
+      { display: flex; flex-flow: row wrap; padding: 3em; justify-content: center;
+      align-items: center; gap: 2em; } .heading { margin-bottom: 1em; padding:
+      3em; display: flex; flex-direction: column; gap: 10px; } .heading h1 {
+      font-size: 50px; } .bookmark-btn { background-color: #e0e0e0; border: none;
+      font-size: 1rem; color: rgb(19, 19, 19); padding: 1em 2em; border-radius:
+      5px; font-weight: 600; width: 100%; margin-top: 10px; cursor: pointer;
+      }
     </style>
   </head>
   <body>
     <div class="heading">
-      <h1>Bookmarks</h1>
-      <p>You're favorite recipes</p>
+      <div class="back">
+        <a href="./index.html">
+          <i class="fa-solid fa-arrow-left">
+          </i>
+        </a>
+        <h3>
+          ReciFilo
+        </h3>
+      </div>
+      <h1>
+        Bookmarks
+      </h1>
+      <p>
+        Your favorite recipes
+      </p>
       <hr>
     </div>
     <div id="bookmarkContainer">
-
     </div>
-
     <script>
-      const bookmarkContainer = document.getElementById("bookmarkContainer");
+      (async function() {
+  const db = firebase.firestore();
+  const uid = sessionStorage.getItem('uid');
+  const bookmarksCollection = db.collection("users").doc(uid).collection("bookmarks");
 
-      function displayBookmarks() {
-        const bookmarks = getBookmarks();
-        bookmarkContainer.innerHTML = bookmarks.join("");
+  function getBookmarks() {
+    return bookmarksCollection.get().then((querySnapshot) => {
+      const bookmarks = [];
+      querySnapshot.forEach((doc) => {
+        const recipeId = doc.data().recipeId; // Retrieve the recipe ID from the document
+        const recipeCardHTML = doc.data().recipeCardHTML;
+        bookmarks.push({ recipeId, recipeCardHTML }); // Push both recipe ID and HTML into the array
+      });
+      return bookmarks;
+    }).catch((error) => {
+      console.error("Error getting bookmarks: ", error);
+      return [];
+    });
+  }
+
+  const bookmarks = await getBookmarks();
+
+  const bookmarkContainer = document.getElementById('bookmarkContainer');
+  if (bookmarks.length === 0) {
+    bookmarkContainer.innerHTML = '<p>There are no bookmarks.</p>';
+  } else {
+    bookmarks.forEach((bookmark) => {
+      const { recipeId, recipeCardHTML } = bookmark;
+      const card = createCard(recipeId, recipeCardHTML); // Create a card element using the recipe ID and HTML
+      bookmarkContainer.appendChild(card); // Append the card to the bookmark container
+    }); 
+  }
+
+  const bookmarkBtns = document.querySelectorAll(".bookmark-btn");
+  bookmarkBtns.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      const card = event.target.closest(".card");
+      const recipeId = card.dataset.recipeId; // Retrieve the recipe ID from the data attribute
+
+      card.remove();
+
+      removeBookmark(recipeId); // Pass the recipe ID to removeBookmark function
+      console.log("Bookmark removed");
+      if (bookmarkContainer.innerHTML === '') {
+        bookmarkContainer.innerHTML = '<p>There are no bookmarks.</p>';
       }
+    });
+  });
 
-      function getBookmarks() {
-        const bookmarksJSON = localStorage.getItem("bookmarks");
-        return bookmarksJSON ? JSON.parse(bookmarksJSON) : [];
-      }
+  function createCard(recipeId, recipeCardHTML) {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.dataset.recipeId = recipeId; // Set the recipe ID as a data attribute
 
-      displayBookmarks();
+  const cardContent = document.createElement("div");
+  cardContent.classList.add("card-content");
+
+  const recipeContainer = document.createElement("div");
+  recipeContainer.innerHTML = recipeCardHTML;
+
+  // Remove the bookmark button from the recipe container
+  const bookmarkBtn = recipeContainer.querySelector(".bookmark-btn");
+  if (bookmarkBtn) {
+    bookmarkBtn.remove();
+  }
+
+  cardContent.appendChild(recipeContainer);
+  card.appendChild(cardContent);
+
+  const removeBookmarkBtn = document.createElement("button");
+  removeBookmarkBtn.classList.add("bookmark-btn");
+  removeBookmarkBtn.innerText = "Remove Bookmark";
+
+  card.appendChild(removeBookmarkBtn);
+
+  return card;
+}
+
+
+  function removeBookmark(recipeId) {
+    bookmarksCollection
+      .where("recipeId", "==", recipeId)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref
+            .delete()
+            .then(() => {
+              console.log("Bookmark removed");
+            })
+            .catch((error) => {
+              console.error("Error removing bookmark: ", error);
+            });
+        });
+      })
+      .catch((error) => {
+        console.error("Error getting bookmark: ", error);
+      });
+  }
+
+  function saveBookmarks(bookmarks) {
+    bookmarksCollection.get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.delete();
+        });
+      })
+      .then(() => {
+        bookmarks.forEach((bookmark) => {
+          bookmarksCollection.add({
+            recipeId: bookmark.recipeId, // Include recipe ID in the document
+            recipeCardHTML: bookmark.recipeCardHTML
+          });
+        });
+        console.log("Bookmarks saved");
+      })
+      .catch((error) => {
+        console.error("Error saving bookmarks: ", error);
+      });
+  }
+})();
+
     </script>
   </body>
+
 </html>

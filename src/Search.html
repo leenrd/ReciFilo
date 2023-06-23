@@ -31,7 +31,7 @@
         </div>
     </nav>
 
-    <input class="searchHead">
+    <div class="searchHead">
     <div class="input">
         <input type="text" class="searchBar" placeholder="Search..." id="searchBar">
         <button class="searchBtn" id="searchBtn">
@@ -39,6 +39,10 @@
         </button>
     </div>
     </div>
+
+    <p class="inst">
+        Enter a dish, like "adobo" or ingredients separated by space like "chicken carrots pasta" to prompt the search. We have accurate data of tens of thousands of foods, including a wide variety of dishes.
+    </p>
 
     <main id="results">
        <h1>
@@ -56,5 +60,12 @@
             Pinoy Recipe
         </span>Built By: Group 5</p>
     </footer>
+
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+
+    <script src="../js/config.js"></script>
 </body>
 </html>
