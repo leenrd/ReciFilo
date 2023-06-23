@@ -1,0 +1,204 @@
+*,
+::after,
+::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    /* outline: 1px solid red; */
+}
+
+:root {
+    --clr-accent: #054300;
+}
+
+img {
+    width: 100%;
+    display: inline-block;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+}
+.google-cta {
+    padding: .7em 1.8em;
+    font-weight: 600;
+    border: none;
+    background-color: white;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    cursor: pointer;
+    box-shadow: 0px 0px 4px rgba(142, 142, 142, 0.25);
+}
+
+.google-cta:hover {
+    outline: 1px solid rgb(235, 235, 235);
+    background-color: rgb(243, 243, 243);
+    transition: background-color .3s ease;
+    -webkit-transition: background-color .3s ease;
+    -moz-transition: background-color .3s ease;
+    -ms-transition: background-color .3s ease;
+    -o-transition: background-color .3s ease;
+}
+.cta span {
+    font-size: 12px;
+}
+.cta {
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+.svgGoogle {
+    height: 20px;
+    width: auto;
+}
+.submit {
+    padding: 12px 36px;
+    font-weight: 600;
+    border: none;
+    background-color: var(--clr-accent);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    color: white;
+}
+
+.submit:hover {
+    background-color: white;
+    color: var(--clr-accent);
+    outline: 1px solid var(--clr-accent);
+    transition: background-color .3s ease;
+    -webkit-transition: background-color .3s ease;
+    -moz-transition: background-color .3s ease;
+    -ms-transition: background-color .3s ease;
+    -o-transition: background-color .3s ease;
+}
+
+.right {
+    padding: 3em;
+    font-weight: 600;
+    background: url(../assets/pexels-chan-walrus-958545.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.left {
+    padding: 4em 3em 3em 6em;
+}
+
+.left .container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    height: 100%;
+    justify-content: space-between;
+}
+.heading {
+    display: flex;
+    flex-direction: column;
+    gap: .6em;
+}
+.heading h1 {
+    font-weight: 700;
+    font-size: clamp(1.875rem, 0.6696rem + 2.5714vw, 3rem);
+    width: 363px;
+}
+
+.heading p {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    width: 282px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: .3em;
+}
+
+.form > label {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+}
+
+a:first-child {
+    color: var(--clr-accent);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.form input {
+    padding: 1em;
+    border: 1px solid rgb(155, 155, 155);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.form span {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.terms p{
+    font-size: 12px;
+    width: 400px;
+}
+
+@media all and (max-width: 750px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .form{
+        align-items: center;
+    }
+
+    .container{
+        align-items : center;
+        height: 100vh;
+        justify-content: space-around;
+    }
+
+    .terms {
+        display: flex;
+        justify-content: center;
+        width: 300px;
+        text-align: center;
+    }
+
+    .left {
+        padding: 2em;
+    }
+
+    .form input {
+        max-width: 100%;
+        width: 300px;
+    }
+
+    .form .submit {
+        width: 70%;
+    }
+}

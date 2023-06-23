@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReciFilo</title>
+    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="../css/main.css" />
+
+    <script>
+      const uid = sessionStorage.getItem('uid')
+
+      if(uid == null){
+        window.location.href = './LogInPage.html'
+      }
+    </script>
+
+    </head>
+
+
+    <body>
+        <nav class="navbar" id="navbar">
+            <div class="nav-center">
+                <div class="nav-header">
+                    <a href="index.html" class="nav-logo">
+                        <img src="../assets/favicon.png" alt="Pinoy Recipe">
+                    </a>
+                    <button class="nav-btn btn">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                </div>
+                <div class="nav-links">
+                  <a href="index.html" class="nav-link"> HOME </a>
+                  <a href="#about" class="nav-link"> ABOUT </a>
+                  <a href="#trending" class="nav-link"> TRENDING </a>
+                  <a href="#" id="openModalBtn" class="nav-link">SETTINGS</a>
+                  <a href="Search.html" class="nav-link"> SEARCH </a>
+                  <div class="nav-link contact-link">
+                    <a href="bookmarks.html" class="btn"><i class="fa-solid fa-bookmark"></i>BOOKMARKS</a>
+                  </div>
+                </div>
+            </div>
+        </nav>
+
+        <div id="settingsModal" class="modal">
+          <div class="modal-content">
+              <span class="close">&times;</span>
+              <div class="heading">
+                <h1>Settings</h1>
+                <p>Update account information</p>
+                <hr>
+              </div>
+              <div class="gridModal">
+                <div class="right">
+                  <div class="panel">
+                      <h2 id="edit-name">Edit Name</h2>
+                  </div>
+                  <div class="panel">
+                      <h2 id="edit-pass">Change Password</h2>
+                  </div>
+                  <div class="panel">
+                      <h2 id="edit-email">Change Email</h2>
+                  </div>
+                  <div class="panel">
+                      <h2 id="logOutBtn">Log Out</h2>
+                  </div>
+                </div>
+                <div class="left">
+                  <div class="containerSetting" id="panel">
+                    Select Panel
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+
+        <main>
+          <div class="grid">
+            <div class="left">
+              <div class="sticky">
+                <div class="greetUser">
+                  <h1 id="userName" class="title"></h1>
+                  <span class="subtext">Let's get cooking good looking!</span>
+                </div>
+                <div class="topRecommendations">
+                  <h5>TOP RECOMMENDATIONS</h5>
+                  <div class="items">
+                    <a class="item" href="#">
+                      <div class="text">
+                        <h4>Sweet and Spicy Gochujang Chicken</h4>
+                        <p>Sweet and sour gochujang chicken is a quick wok dish featuring Korean flavors. Serve over rice.</p>
+                      </div>
+                    </a>
+                    <a class="item" href="#">
+                      <div class="text">
+                        <h4>Miso Beef Noodles</h4>
+                        <p>This extremely flavorful, savory noodle dish is inspired by any and all regions’ noodle dishes I’ve ever had along with dishes featuring miso.</p>
+                      </div>
+                    </a>
+                    <a class="item" href="#">
+                      <div class="text">
+                        <h4>Kamayan Feast</h4>
+                        <p>Kamayan is the ultimate hands-on feast where guests eat at a communal table spread with banana leaves, using their fingers as eating utensils.</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right">
+              <span>Filipino Food at your kitchen</span>
+              <img src="../assets/DALL·E 2023-06-06 19.48.18 - the silhouette of the philippines in solid grey in a white background.png" alt="">
+              <h1>
+                Experience
+                7,641 cultures
+              </h1>
+            </div>
+          </div>
+        </main>
+        <hr>
+
+        <section id="about">
+          <div class="wrapper-about">
+            <h1>
+              ReciFilo is an all-in-one platform that empowers the Filipino Food Culture through spreading the wonderful taste of Filipino Foods.
+            </h1>
+            <img src="../assets/vegetable-png-salad-tomato-png-2594.png" alt="">
+          </div>
+        </section>
+
+        <article id="trending">
+          <div class="container">
+            <div class="title">
+              <h1>This Month's Top Search</h1>
+              <hr>
+            </div>
+            <div class="search">
+              <img src="../assets/204958-pork-sinigang-mfs-4-c404775871964fda88d9416cf92cfe8e.webp" alt="">
+              <div class="text">
+                <h1>
+                  Pork Sinigang
+                </h1>
+                <p>Sinigang is a Filipino soup cooked with pork. Serve with rice and for additional sauce, use soy or fish sauce. If you want to, you can add what Filipinos call gabi gabi, which is a small taro root. When peeled they look like potatoes. You can add five to six of them when you add the water and make sure they are cooked through. Take them out when they are cooked because they can get too soft.</p>
+                <a class="seeRecipe btn" target="_blank" href="https://www.allrecipes.com/recipe/204958/pork-sinigang/"><i class="fa-sharp fa-solid fa-link"></i>See full recipe</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <footer class="page-footer">
+          <p>&copy; <span id="date">2023</span>
+          <span class="footer-logo">
+              Pinoy Recipe
+          </span>Built By: Group 5</p>
+      </footer>
+
+      <!-- firebase -->
+      <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+
+      <script src="../js/config.js"></script>
+      <script src="../js/main.js"></script>
+      <script src="../js/logout.js"></script>
+    </body>
+</html>

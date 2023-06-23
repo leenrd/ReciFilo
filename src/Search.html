@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
+    <title>ReciFilo</title>
+    <script src="../js/search.js" defer></script>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-center">
+            <div class="nav-header">
+                <a href="index.html" class="nav-logo">
+                    <img src="../assets/favicon.png" alt="Pinoy Recipe">
+                </a>
+                <button class="nav-btn btn">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+            </div>
+            <div class="nav-links">
+              <a href="index.html" class="nav-link"> HOME </a>
+              <a href="Search.html" class="nav-link"> SEARCH </a>
+
+              <div class="nav-link contact-link">
+                <a href="Bookmarks.html" class="btn"><i class="fa-solid fa-bookmark"></i>BOOKMARKS</a>
+              </div>
+            </div>
+        </div>
+    </nav>
+
+    <input class="searchHead">
+    <div class="input">
+        <input type="text" class="searchBar" placeholder="Search..." id="searchBar">
+        <button class="searchBtn" id="searchBtn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+    </div>
+
+    <main id="results">
+       <h1>
+        Search Results
+       </h1>
+       <hr>
+       <section class="searchResults" id="searchResults">
+
+       </section>
+    </main>
+
+    <footer class="page-footer">
+        <p>&copy; <span id="date">2023</span>
+        <span class="footer-logo">
+            Pinoy Recipe
+        </span>Built By: Group 5</p>
+    </footer>
+</body>
+</html>
